@@ -3,56 +3,57 @@ public class RotX {
     public static final char[] MIN = {'a', 'à', 'á', 'b', 'c', 'ç', 'd', 'e', 'è', 'é', 'f', 'g', 'h', 'i', 'ì', 'í', 'ï', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'ò', 'ó', 'p', 'q', 'r', 's', 't', 'u', 'ù', 'ú', 'ü', 'v', 'w', 'x', 'y', 'z'};
 
     public static String xifratRotX(String text, int desp) {
-        String codText = "";
+        StringBuilder codText = new StringBuilder();
         for (int i = 0; i < text.length(); i++) {
             if (Character.isUpperCase(text.charAt(i))) { 
                 for (int j = 0; j < MAJ.length; j++) {
                     if (MAJ[j] == text.charAt(i)) {
-                        codText += MAJ[(j + desp) % MAJ.length];
+                        codText.append(MAJ[(j + desp) % MAJ.length]);
                         break;
                     }
                 }
             } else if (Character.isLowerCase(text.charAt(i))) {
                 for (int j = 0; j < MIN.length; j++) {
                     if (MIN[j] == text.charAt(i)) {
-                        codText += MIN[(j + desp) % MIN.length];
+                        codText.append(MIN[(j + desp) % MIN.length]);
                         break;
                     }
                 }
             } else {
-                codText += text.charAt(i); 
+                codText.append(text.charAt(i)); 
             }
         }
-        return codText;
+        return codText.toString();
     }
 
     public static String desxifratRotX(String text, int desp) {
-        String codText = "";
+        StringBuilder codText = new StringBuilder();
         for (int i = 0; i < text.length(); i++) {
             if (Character.isUpperCase(text.charAt(i))) { 
                 for (int j = 0; j < MAJ.length; j++) {
                     if (MAJ[j] == text.charAt(i)) {
-                        codText += MAJ[(j - desp + MAJ.length) % MAJ.length];
+                        codText.append(MAJ[(j - desp + MAJ.length) % MAJ.length]);
                         break;
                     }
                 }
             } else if (Character.isLowerCase(text.charAt(i))) {
                 for (int j = 0; j < MIN.length; j++) {
                     if (MIN[j] == text.charAt(i)) {
-                        codText += MIN[(j - desp + MIN.length) % MIN.length];
+                        codText.append(MIN[(j - desp + MIN.length) % MIN.length]);
                         break;
                     }
                 }
             } else {
-                codText += text.charAt(i); 
+                codText.append(text.charAt(i)); 
             }
         }
-        return codText;
+        return codText.toString();
     }
 
-    public String forçaBrutaRotX(String text) {
+    public static String forçaBrutaRotX(String text) {
         for (int i = 0; i < MIN.length; i++) {
-            
+            String des = desxifratRotX(text, i);
+            System.out.println("Desplaçament de " + i + " posicions: " + des);
         }
         return text;
     }
@@ -80,5 +81,6 @@ public class RotX {
         System.out.println("Segon text desxifrat amb un desplaçament de " + desp2 + ": " +  desxifrat2);
         System.out.println("Primer text desxifrat amb un desplaçament de " + desp1 + ": " +  desxifrat3);
         System.out.println("Segon text desxifrat: amb un desplaçament de " + desp2 + ": " +  desxifrat4);
+        forçaBrutaRotX(xifrat1);
     }   
 }
