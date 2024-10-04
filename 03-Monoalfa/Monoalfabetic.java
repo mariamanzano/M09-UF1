@@ -21,30 +21,59 @@ public class Monoalfabetic {
 
     public static String xifraMonoAlfa(String text, char[] alfabetPermutat) {
         StringBuilder codText = new StringBuilder();
+        
         for (int i = 0; i < text.length(); i++) {
-            if (Character.isLowerCase(text.charAt(i))) {
-                char llMin = text.charAt(i);
-                char llMaj = Character.toUpperCase(llMin);
+            char lletra = text.charAt(i); 
+            if (Character.isLetter(lletra)) {
+                char llMaj = Character.toUpperCase(lletra);
+                
                 for (int j = 0; j < MAJ.length; j++) {
-                    if (llMaj == MAJ[j]) {
+                    if (llMaj == MAJ[j]) { 
                         char llXifrada = alfabetPermutat[j];
-                        if (Character.isLowerCase(llMin)) {
-                            codText.append(Character.toLowerCase(llXifrada));
-                        } else { 
-                            codText.append(llXifrada);
+                        
+
+                        if (Character.isLowerCase(lletra)) {
+                            codText.append(Character.toLowerCase(llXifrada)); 
+                        } else {
+                            codText.append(llXifrada); 
                         }
                         break;
                     }
                 }
             } else {
-                codText.append(text.charAt(i));
+                codText.append(lletra);
             }
         }
-        return codText.toString();
+        return codText.toString(); 
     }
+
     
     public static String desxifraMonoAlfa(String text, char[] alfabetPermutat) {
-        return text;
+        StringBuilder codText = new StringBuilder();
+        
+        for (int i = 0; i < text.length(); i++) {
+            char lletra = text.charAt(i); 
+            if (Character.isLetter(lletra)) {
+                char llMaj = Character.toUpperCase(lletra);
+                
+                for (int j = 0; j < MAJ.length; j++) {
+                    if (llMaj == alfabetPermutat[j]) { 
+                        char llXifrada = MAJ[j];
+                        
+
+                        if (Character.isLowerCase(lletra)) {
+                            codText.append(Character.toLowerCase(llXifrada)); 
+                        } else {
+                            codText.append(llXifrada); 
+                        }
+                        break;
+                    }
+                }
+            } else {
+                codText.append(lletra);
+            }
+        }
+        return codText.toString(); 
     }
 
     public static void main(String[] args) {
@@ -53,9 +82,13 @@ public class Monoalfabetic {
         char[] alfabetPermutat = permutaAlfabet(MAJ);
         String xifrat1 = xifraMonoAlfa(text1, alfabetPermutat);
         String xifrat2 = xifraMonoAlfa(text2, alfabetPermutat);
+        String desxifrat1 = desxifraMonoAlfa(xifrat1, alfabetPermutat);
+        String desxifrat2 = desxifraMonoAlfa(xifrat2, alfabetPermutat);
         System.out.println("Primera frase: " + text1);
         System.out.println("Segona frase: " + text2);
         System.out.println("Primera frase xifrada: " + xifrat1);
         System.out.println("Segona frase xifrada: " + xifrat2);
+        System.out.println("Primera frase desxifrada: " + desxifrat1);
+        System.out.println("Segona frase desxifrada: " + desxifrat2);
     }
 }
