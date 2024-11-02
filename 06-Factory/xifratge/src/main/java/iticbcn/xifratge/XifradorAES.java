@@ -62,4 +62,33 @@ public class XifradorAES implements Xifrador {
     // return String desxifrat
         return new String(msgDesxifrat, "UTF-8");
     }   
+
+    @Override
+    public TextXifrat xifra(String msg, String clau) {
+        try {
+            if (clau == null && !clau.equals(CLAU)) {
+                throw new ClauNoSuportada("La clau no es soportada");
+            }
+            byte[] msgXifrat = xifraAES(msg, CLAU);
+            return new TextXifrat(msgXifrat);
+        } catch (Exception e) {
+            System.err.println("Error en xifrat: " + e.getMessage());
+            System.exit(1);
+            return null;
+        }
+    }
+
+    @Override
+    public String desxifra(TextXifrat xifrat, String clau) {
+        try {
+            if (clau == null && !clau.equals(CLAU)) {
+                throw new ClauNoSuportada("La clau no es soportada");
+            }
+            return desxifraAES(xifrat.getBytes(), CLAU);
+        } catch (Exception e) {
+            System.err.println("Error en desxifrat: " + e.getMessage());
+            System.exit(1);
+            return null;
+        }
+    }
 }

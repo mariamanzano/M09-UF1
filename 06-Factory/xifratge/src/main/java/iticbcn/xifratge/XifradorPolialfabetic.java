@@ -53,8 +53,7 @@ public class XifradorPolialfabetic implements Xifrador {
         }
         return codText.toString(); 
     }
-
-    
+   
     public String desxifraPoliAlfa(String text) {
         StringBuilder codText = new StringBuilder();
         for (int i = 0; i < text.length(); i++) {
@@ -78,5 +77,19 @@ public class XifradorPolialfabetic implements Xifrador {
             }
         }
         return codText.toString(); 
-    }      
+    }
+
+    @Override
+    public TextXifrat xifra(String text, String clau) throws ClauNoSuportada {
+        if (clau != null) throw new ClauNoSuportada("La clau no es soportada");
+        String codText = xifraPoliAlfa(text);
+        return new TextXifrat(codText.getBytes());
+    }
+    
+    @Override
+    public String desxifra(TextXifrat xifrat, String clau) throws ClauNoSuportada {
+        if (clau != null) throw new ClauNoSuportada("La clau no es soportada");
+        String codText = desxifraPoliAlfa(new String(xifrat.getBytes()));
+        return codText;
+    }
 }

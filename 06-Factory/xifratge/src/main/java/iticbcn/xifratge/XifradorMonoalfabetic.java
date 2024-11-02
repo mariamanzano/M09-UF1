@@ -54,13 +54,6 @@ public class XifradorMonoalfabetic implements Xifrador {
         return codText.toString(); 
     }
 
-    @Override
-    public TextXifrat xifra(String text, String clau) throws ClauNoSuportada {
-        if (clau != null) throw new ClauNoSuportada("La clau no es soportada");
-        String codText = xifraMonoAlfa(text);
-        return new TextXifrat(codText.getBytes());
-    }
-    
     public String desxifraMonoAlfa(String text) {
         StringBuilder codText = new StringBuilder();
         
@@ -90,9 +83,16 @@ public class XifradorMonoalfabetic implements Xifrador {
     }
 
     @Override
-    public TextXifrat desxifra(String text, String clau) throws ClauNoSuportada {
+    public TextXifrat xifra(String text, String clau) throws ClauNoSuportada {
         if (clau != null) throw new ClauNoSuportada("La clau no es soportada");
-        String codText = desxifraMonoAlfa(text);
+        String codText = xifraMonoAlfa(text);
         return new TextXifrat(codText.getBytes());
+    }
+    
+    @Override
+    public String desxifra(TextXifrat xifrat, String clau) throws ClauNoSuportada {
+        if (clau != null) throw new ClauNoSuportada("La clau no es soportada");
+        String codText = desxifraMonoAlfa(new String(xifrat.getBytes()));
+        return codText;
     }
 }
