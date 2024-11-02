@@ -15,6 +15,6 @@ public class TextXifrat {
 
     @Override
     public String toString() {
-        return "TextXifrat [byt=" + Arrays.toString(byt) + "]";
+        return new String(byt);
     }
 }
