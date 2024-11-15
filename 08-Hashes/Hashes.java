@@ -23,7 +23,7 @@ public class Hashes {
 
     public String getPBKDF2AmbSalt(String pw, String salt) {
         try {
-            int iteracions = 845;
+            int iteracions = 10;
             int clauLL = 512;
             char[] pwChars = pw.toCharArray();
             byte[] saltBytes = salt.getBytes(StandardCharsets.UTF_8);
